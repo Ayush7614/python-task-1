@@ -26,7 +26,25 @@ def merge_lists(list_1, list_2) -> list:
     - Both lists are unsorted
     - Both lists can have missing values (for ex list_2 has missing id=2)
     """
-    # return list_3
+    # Create a dictionary to store the merged information
+    merged_dict = {}
 
+    # Merge the information from list_1 into the merged_dict
+    for item in list_1:
+        merged_dict[item["id"]] = item
+
+    # Merge the information from list_2 into the merged_dict
+    for item in list_2:
+        id = item["id"]
+        if id in merged_dict:
+            merged_dict[id].update(item)
+        else:
+            merged_dict[id] = item
+
+    # Convert the merged_dict into a list
+    list_3 = list(merged_dict.values())
+
+    return list_3
 
 list_3 = merge_lists(list_1, list_2)
+print(list_3)
